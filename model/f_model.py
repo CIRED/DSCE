@@ -61,18 +61,8 @@ def emissions(ab_level,production,carbon_intensity):#emissions per period
     e=carbon_intensity*(1-ab)*production
     return e;
 
-def partialy_emissions(ab_level,production,carbon_intensity):#emissions per period, partially derived with respect to y
-    ab=maximum(ab_level,0)
-    ab=minimum(ab,1)
-    e=carbon_intensity*(1-ab)
-    return e;
-
 def temperature(cum_e):
     v=beta_temp*cum_e
-    return v;
-
-def partials_temperature(cum_e):#temperature, partially derived with respect to cumulative emissions
-    v=beta_temp
     return v;
 
 #state of the environment as a function of temperature
@@ -84,10 +74,4 @@ def damage_factor(temp,eps):#damages factor, correcting TFP, from temperature an
     #omega=maximum(10**(-8), 1 /(1+pi1*temp+pi2*temp**pi3)-eps)
     #New damage factor from Nordhaus (2016)
     omega=maximum(10**(-8), 1-(pi1*temp+pi2*temp**pi3)-eps)
-    return omega;
-
-def partialt_damage_factor(temp,eps):#damages factor, partially derived with respect to temperature
-    #omega=-(pi1+pi2*pi3*temp**(pi3-1)) /((1+pi1*temp+pi2*temp**pi3)**2)
-    #Idem
-    omega=-(pi1+pi2*pi3*temp**(pi3-1))
     return omega;
