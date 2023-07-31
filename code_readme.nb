@@ -1,0 +1,37 @@
+Description of the code for replication
+
+Run the whole document: run meta_run.py in the run folder.
+
+How the code works:
+
+Step 1 : 
+meta_run.py (run folder) checks if the study is well defined.
+
+Step 2:
+run_meddicci_tp.py (model folder) executes all functions
+a. Upload parameter values and compute exogenous trends.
+b. Definition of functions: utility, damage factor, economic & climatic variables.
+c. Functions for approximation with Chebyshev polynomials (number of polynomials, nodes, Bellman, bounds).
+d. Definition for Bellman functions: maximum for instantaneous utility, terminal value, law motion for state variables.
+e. Definition of approximation intervals.
+f. i interpolations per period from last to first period by minimization of Bellman functions based on the guess.
+g. One simulation from first to last period based on the interpolation.
+
+Step 3: 
+back to meta_run.py
+a. Calculation of economic and climatic variables
+b. Calculation of the SCC along the optimal path.
+
+Step 4: 
+Stochasticdraw3.py
+Stochastic simulations to have the values for the decomposition.
+
+
+How to change the values for the runs? 
+1/ Change the parameters: go to parameter folder.
+2/ Define the runs: go to run folder and change the Excel "study" (new Excel file and/or define specific runs to be computed).
+3/ Change the number of draws and the runs that should be run multiple times: meta_run.py
+4/ Run for additive or risk-sensitive preferences: if additive preferences, make sure epsilon_b=0.
+
+
+
