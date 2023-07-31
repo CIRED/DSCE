@@ -1,0 +1,5 @@
+study;runs_add_check;;;
+list_prev1;dim;T;rho1y;theta;epsilon_b
+list_prev2;dim;T;rho1y;theta;epsilon_b
+to_run;1;150;;;
+to_analyze;1;150;;;
