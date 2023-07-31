@@ -11,3 +11,4 @@ Version 2: work by Nicolas Taconet (Taconet, Guivarch & Pottier, Environmental &
 Version 3: work by Romain Fillon (Fillon, Guivarch & Taconet, Journal of Environmental Economics and Management, 2023): transfer the code to python v3, update dynamics to DICE 2016, introduce risk-sensitive preferences and value function decomposition.
 
 Version available here is version 3.
+Contact for questions: Romain Fillon, rfillon@protonmail.com
