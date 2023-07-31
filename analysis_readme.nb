@@ -1,4 +1,4 @@
 Analysis of the runs
 
 Set your working directory.
-The R file gives each figure found on the document.
+The R file gives each figure found on the document by Fillon, Guivarch, Taconet, 2023.
