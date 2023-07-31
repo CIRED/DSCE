@@ -1,7 +1,0 @@
-model;ramsey
-stochastic;0
-draws;1000
-deg;4
-out_penality;1000
-tolmin;0.0001
-tolint;0.0001
