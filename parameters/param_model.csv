@@ -1,0 +1,48 @@
+dim;3;number of state variables
+T;100;time horizon (number of time steps)
+deltaT;5;time step (in years)
+theta;1.5;intertemporal elasticity of substitution
+rra;1.5;relative risk aversion (note: this was used in the model without tipping point, with stochastic damages. In the current version with a tipping point, just specify rra=theta)
+rho1y;0.015;pure-time preference rate
+POP0;7403;2015 world population millions
+GPOP0;0.134;Growth rate of population per year
+POPASYM;11500;Asymptotic population 
+A0;0.04063;Initial level of total factor productivity (2015) A=5.115*(1000^(1-gamma))
+GA0;0.076;Initial growth rate for technology per period 2008 (0.076)
+DELA;0.005;Decline rate of technol change per year 2008 (default 0.005 per period)
+delta1y;0.1;Depreciation rate on capital per year
+alpha;0.3;Capital elasticity in production function
+Y0;105.5;2015 world gross output trill 2010 US dollars (T$)
+K0;223;2015 value capital trill 2010 US dollars (T$)
+SIG0;0.00035032;emission factor kgC/ $2015 (new calculation using e0/q0*(1-miu0) (2015 0.3502)
+GSIGMA;0.038;Initial degrowth of sigma per year (default value: .0152)
+DSIG;0.001;Decline rate of decarbonization per period (default value: .001 per period)
+theta2;2.6;Exponent of control cost function (default value: 2.6)
+PBACK;550;Cost of backstop 2015 $ per tC 2010 (default value: 550)
+BACKRAT;2;Ratio initial to final backstop cost 2005 (default value: 2)
+GBACK;0.025;Initial cost decline 2015 backstop pc per year (default value: .025)
+beta_temp;1.65;parameter of link between cumulative emissions and temperature change (in °C/TtC)
+pi1;0;mean damage function parameter
+pi2;0.00236;mean damage function parameter (default value: 0.0028388)
+pi3;2;curvature of damage function (default value: 2 (Nordhaus), 6 for Weitzman 2012)
+damage_capital;0;share of damages bearing on capital stock (range 0-0.3 in Kopp et al. 2012, The influence of the specification of climate change damages on the social cost of carbon)
+mult_tfp;0;multiplier of TFP ratio in growth function
+mult_shock;0;multiplier of shock in growth function
+kappa1;0;linear trend of damages on growth
+kappa2;0;intercept of damages on growth
+kappa3;2;exponent of damages on growth
+gamma;0;share of utility in environmental goods
+subs;3;elasticity of substitution between consumption and environmental goods
+E0;2221112799;initial value of environmental good
+ae;0.1;damage coefficient for environmental good
+T0;0.87;calibration value for temperature increase wrt preindustrial era
+tp;0;0 if there is no tipping point, 1 if there is a tipping point
+threshold_min;2;put the minimum value for threshold
+threshold_max;4;put the maximum value for threshold
+J;0;share of production lost post-tipping point (default 0.00)
+deterministic;0;1 to compute a run based on deterministic equivalent of the tippign point
+alpha0;0;(to check whether it's used somewhere?)
+gamma_EZ;2;risk aversion in the Epstein-Zin model
+epsilon0;0.001;to avoid sign = 0 in the Bellman function
+pi2_tp;0.00236;Value of pi2 after the tipping point
+epsilon_b;;
