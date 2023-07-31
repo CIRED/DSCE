@@ -12,3 +12,6 @@ Version 3: work by Romain Fillon (Fillon, Guivarch & Taconet, Journal of Environ
 
 Version available here is version 3.
 Contact for questions: Romain Fillon, rfillon@protonmail.com
+
+
+Distributed under the GNU GENERAL PUBLIC LICENSE. See LICENSE for more information.
