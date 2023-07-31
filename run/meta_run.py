@@ -400,14 +400,14 @@ for run_no in to_analyze:
 
                 #Calculation for stochastic draws.
                 #define nb of draws
-                #nbofdraws=10
+                nbofdraws=10
 
                 #define run where we want the draws
-                #LL=[4,7,11,13,60,63,65,67,69,74,77,79,81,83]
+                LL=[4,7,11,13,60,63,65,67,69,74,77,79,81,83]
 
-                #if run_no in LL:
-                #        if not threshold_max==threshold_min:
-                #                exec(open(preprod_folder+'stochasticdraws3.py').read())
+                if run_no in LL:
+                        if not threshold_max==threshold_min:
+                                exec(open(preprod_folder+'stochasticdraws3.py').read())
 
                 #exec(open(preprod_folder+'stochasticdraws.py').read())                                
                 #average_SCC=[-1]
