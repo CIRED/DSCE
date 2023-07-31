@@ -1,5 +1,4 @@
-# Draw main graphs
-
+# Draw graphs for Fillon, Guivarch, Taconet, 2023.
 
 #setwd 
 #setwd("C:/Users/")
