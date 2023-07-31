@@ -2,11 +2,6 @@
 
 
 #reading general parameters
-gamma=0
-#subs=3
-E0=222.1112799
-ae=0.1
-#T0=0.8
 
 with open(run_folder+'param_gen.csv', 'r') as f:
     reader = csv.reader(f,  delimiter=';')
