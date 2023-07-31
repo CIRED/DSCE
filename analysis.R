@@ -3,8 +3,6 @@
 
 #setwd 
 #setwd("C:/Users/")
-setwd("C:/Users/Fillon/Desktop/scientifique/P1_Multiplicative/texmaker/relectures finales/DOSSIER_final_JEEM/JEEM_code/modeleTP/")
-# Ratio depending on J and epsilon (Figure 1)
 rm(list=ls())
 library(zoo)
 library(akima)
@@ -60,24 +58,17 @@ plot1<-ggplot(Matrix_comp, aes(x=J*100, y=ratio, group=epsilon_b, linetype=facto
   geom_line(color='black')+
   ylab("Ratio of risk-sensitive to additive SCC") +
   scale_linetype_manual("Temporal risk aversion \u03B5", values = c("0.001" = 8, "0.133" = 6, "0.3" = 3))+
-#  scale_y_discrete(limits=c(1, 2,4,6,8,10,12,14,16))+
   scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
-#  scale_x_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
   theme(legend.position="none")
- # theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 plot2<-ggplot(Matrix_comp2, aes(x=J*100, y=SCC0, group=epsilon, linetype=factor(epsilon))) +
   xlab("Irreversible shock to the output J (in %)") +
   geom_line()+
-  #  geom_line(size=1.2,color = "#CB2027")+
   ylab("Absolute value of the SCC (in $/tC)") +
-  #  scale_colour_manual("Social Welfare Function", values = c('red','blue'))+
-#  scale_y_discrete(limits=c(75, 1000, 2000,3000, 4000, 5000))+
   scale_y_discrete(limits=c(75, 150, 225, 300, 375))+
   scale_linetype_manual("Temporal risk aversion \u03B5", values = c("0" = 1, "0.001" = 8, "0.133" = 6, "0.3" = 3))+
   theme_bw()+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
   theme(axis.title.x = element_text(size = 12),axis.title.y = element_text(size = 12))
 
 library(patchwork)
@@ -86,7 +77,6 @@ a
 
 ###EQUIVALENCE IN J / rho (FIGURE 2)
 matrix_crra <- read_excel("run/SCC_matrix_runs_add_3105b_revisions.xlsx")
-#matrix_crra <- read_excel("SCC_matrix_runs_add_3105b.xlsx")
 matrix_rs <- read_excel("run/SCC_matrix_runs_rs_3105b.xlsx")
 colnames(matrix_crra)<-c("id","run_no","rho1y","theta","rra","J","broken","tp","deterministic","SCC0","finalT","threshold_max","damage")
 colnames(matrix_rs)<-c("id","run_no","rho1y","theta","epsilon","J","broken_b","tp","deterministic","SCC0_rs","finalT_b","threshold_max","damage")
@@ -118,7 +108,6 @@ plotJ<-ggplot(nearest, aes(x=J_rs*100, y=J*100)) +
                colour = "black",size=0.4, linetype=3)+
   scale_y_continuous(breaks=c(0,10,14,20,30,40))+
   theme_bw()+
- # theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   theme(axis.title.x = element_text(size = 12),axis.title.y = element_text(size = 12))
 
 SCC_matrix_runs_add <- read_excel("run/SCC_matrix_runs_add_3105b.xlsx")
@@ -136,7 +125,6 @@ plotrho<-ggplot(Matrix_CRRA, aes(x=J*100, y=rho1y*100)) +
   geom_hline(yintercept = 1.5, linetype="dotted")+
   scale_y_continuous(breaks=c(0.1, 0.5, 1, 1.5), labels=c("Stern = 0.1", "0.5", "1", "Nordhaus = 1.5")) +
   theme_bw()+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   theme(axis.title.x = element_text(size = 12),axis.title.y = element_text(size = 12))
 library(patchwork)
 plotparam=plotrho+plotJ
@@ -156,7 +144,6 @@ DWI_rs_10_3 <- read.csv("outputs/runs_revisions9rs_run0029-2023-03-09-08h55/comp
 MHE_rs_10_3 <- read.csv("outputs/runs_revisions9rs_run0029-2023-03-09-08h55/complete_MHE_rs.csv")
 
 matrix_decomp <- rbind(DWI_rs_1_1,MHE_rs_1_1,DWI_rs_10_1,MHE_rs_10_1,DWI_rs_1_2,MHE_rs_1_2,DWI_rs_10_2,MHE_rs_10_2,DWI_rs_1_3,MHE_rs_1_3,DWI_rs_10_3,MHE_rs_10_3)
-#matrix_decomp <- read_excel("Decomp_matrix_runs_rs_3105b.xlsx")
 
 matrix_decomp$channel=rep(1:2, times = 6)
 matrix_decomp$id=rep(c("0.001","0.133","0.3"), each = 4)
@@ -258,7 +245,7 @@ Matrix_comp<-Matrix_comp %>%
 
 #plot
 ggplot(Matrix_comp, aes(x=threshold_max, y=ratio))+
-  xlab("Higher temperature interval (캜)") +
+  xlab("Higher temperature interval (째C)") +
   geom_line(size=1.2,color = "black")+
   ylab("Ratio of risk-sensitive to additive SCC") +
   scale_linetype_manual("Temporal risk aversion", values = c("0.001" = 1, "0.133" = 6, "0.3" = 3))+
@@ -295,7 +282,6 @@ ggplot(Matrix_comp2, aes(x=J*100, y=ratio, group=theta, linetype=factor(theta)))
   geom_hline(yintercept = 0, linetype="dotted")+
   scale_linetype_discrete("Inequality aversion \u03B7")+
   theme_bw()+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   theme(axis.title.x = element_text(size = 12),axis.title.y = element_text(size = 12))
 
 
@@ -321,26 +307,15 @@ plot_rev1<-ggplot(total_min, aes(x=gamma, y=value)) +
   xlab("Relative risk aversion \u03B3") +
   geom_line(color='black')+
   ylab("Share of SCC with expected damages in stochastic SCC (in %)") +
-  #  scale_linetype_manual("Resistance to intertemporal substitution \u03B8", values = c("0.5" = 8, "0.8" = 3, "1.5" = 6))+
-#  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
   geom_hline(yintercept=100,linetype="dotted")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 plot_rev2<-ggplot(total, aes(x=gamma, y=value2)) +
   xlab("Relative risk aversion \u03B3") +
   geom_line(color='black')+
   ylab("Share of SCC with expected damages in stochastic SCC (in %)") +
-  #  scale_linetype_manual("Resistance to intertemporal substitution \u03B8", values = c("0.5" = 8, "0.8" = 3, "1.5" = 6))+
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
   geom_hline(yintercept=100,linetype="dotted")
-  #geom_vline(xintercept=1,linetype="dotted")+
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 library(patchwork)
 a=plot_rev1+plot_rev2
 
@@ -354,26 +329,14 @@ plot_SCCEZW<-ggplot(matrix_EZW, aes(x=gamma, y=SCC0)) +
   geom_line(color='black')+
   ylim(0, 600000)+
   ylab("Stochastic SCC (in $/tC)") +
-  #  scale_linetype_manual("Resistance to intertemporal substitution \u03B8", values = c("0.5" = 8, "0.8" = 3, "1.5" = 6))+
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()
-  #theme(legend.position="none")+
-  #scale_linetype_manual("Shock J (in %)", values = c("1" = 8, "10" = 3))+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 plot_logSCCEZW<-ggplot(matrix_EZW, aes(x=gamma, y=log(SCC0))) +
   xlab("Relative risk aversion \u03B3") +
   geom_line(color='black')+
   ylab("Stochastic SCC (log scale)") +
   ylim(4, 14)+
-  #  scale_linetype_manual("Resistance to intertemporal substitution \u03B8", values = c("0.5" = 8, "0.8" = 3, "1.5" = 6))+
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()
-  #theme(legend.position="none")+
-  #scale_linetype_manual("Shock J (in %)", values = c("1" = 8, "10" = 3))+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 #SCC under RS preferences
 matrix_RS <- read_excel("run/SCC_matrix_runs_revisions9rs.xlsx")
@@ -386,33 +349,19 @@ plot_SCCRS<-ggplot(matrix_RS, aes(x=epsilon_b, y=SCC0)) +
   geom_line(color='black')+
   ylim(0, 600000)+
   ylab("Stochastic SCC (in $/tC)") +
-  #  scale_linetype_manual("Resistance to intertemporal substitution \u03B8", values = c("0.5" = 8, "0.8" = 3, "1.5" = 6))+
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()
-  #theme(legend.position="none")+
-  #scale_linetype_manual("Shock J (in %)", values = c("1" = 8, "10" = 3))+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 plot_logSCCRS<-ggplot(matrix_RS, aes(x=epsilon_b, y=log(SCC0))) +
   xlab("Temporal risk aversion \u03B5") +
   geom_line(color='black')+
   ylab("Stochastic SCC (log scale)") +
   ylim(4, 14)+
-  #  scale_linetype_manual("Resistance to intertemporal substitution \u03B8", values = c("0.5" = 8, "0.8" = 3, "1.5" = 6))+
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()
-  #theme(legend.position="none")+
-  #scale_linetype_manual("Shock J (in %)", values = c("1" = 8, "10" = 3))+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 library(patchwork)
 SCC=plot_SCCEZW+plot_SCCRS
 SCClog=plot_logSCCEZW+plot_logSCCRS
 
-
-#SCCed/SCCstoch for different tra under risk_sensitive preferences _ small values
 matrix_rs_ed <- read_excel("run/SCC_matrix_runs_revisions9rs.xlsx")
 colnames(matrix_rs_ed)<-c("id","run_no","rho1y","theta","epsilon_b","J","broken","tp","deterministic","SCC0","finalT","threshold_max","damage","gamma")
 
@@ -424,34 +373,16 @@ matrix_rs_edstoch$det=0
 total2 <- merge(matrix_rs_edstoch, matrix_rs_eddet,by=c("epsilon_b","J"))
 total2$value = (total2$SCC0.y/total2$SCC0.x)*100
 total2=subset(total2, select=c("epsilon_b","J","value"))
-#total_min=subset(total, total$epsilon_b<=0.133)
-
-#plot_rev2<-ggplot(total_min, aes(x=epsilon_b, y=value)) +
-#  xlab("Temporal risk aversion \u03B5") +
-#  geom_line(color='black')+
-#  ylab("Ratio of stochastic SCC to the SCC under expected damages") +
- # scale_linetype_manual("Shock J (in %)", values = c("1" = 8, "10" = 3))+
-#  xlim(0.00001,0.133)+
-  #  scale__discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
-#  theme_bw()+
-#  geom_hline(yintercept=1,linetype="dotted")+
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
+                
 plot_rev3<-ggplot(total2, aes(x=epsilon_b, y=value)) +
   xlab("Temporal risk aversion \u03B5") +
   geom_line(color='black')+
   ylab("Share of SCC with expected damages in stochastic SCC (in %)") +
-  # scale_linetype_manual("Shock J (in %)", values = c("1" = 8, "10" = 3))+
-  #  scale__discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
   scale_x_continuous(breaks=c(0,0.3,1,2,3,4))+
   geom_hline(yintercept=50,linetype="dotted")+
   geom_vline(xintercept=0.3,linetype="dotted")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-# (SCCstoch-SCCed)_rs - (SCCstoch-SCCed)_additive   for different tra under risk_sensitive preferences
 final<- merge(matrix_rs_edstoch, matrix_rs_eddet,by=c("epsilon_b","J"))
 final$value = (final$SCC0.x-final$SCC0.y)
 matrix_add <- read_excel("run/SCC_matrix_runs_revisions8.xlsx")
@@ -470,15 +401,8 @@ final_min=subset(final, final$epsilon_b<=0.3)
 plot_rev4<-ggplot(final_min, aes(x=epsilon_b, y=value)) +
   xlab("Temporal risk aversion \u03B5") +
   geom_line(color='black')+
- # scale_y_continuous(breaks=c(1.6,25,50,75,100))+
-#  ylim(c(0,100))+
   ylab("Share of the additive premium in the risk-sensitive premium (in %)") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()
-#  geom_hline(yintercept=1.7, linetype="dotted")+
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 library(patchwork)
 b=plot_rev3+plot_rev4
@@ -502,17 +426,10 @@ plot_rev2<-ggplot(total, aes(x=theta, y=value, group=J, linetype=factor(J))) +
   geom_line(color='black')+
   ylab("Ratio of stochastic SCC to the SCC under expected damages") +
   scale_linetype_manual("Shock J (in %)", values = c("1" = 8, "10" = 3))+
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
   geom_hline(yintercept=1)
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
-
 
 ##Stochastic time paths
-
 library(matrixStats)
 
 processing2 <- function(traj_SCC) {
@@ -537,7 +454,6 @@ processing2 <- function(traj_SCC) {
   return(qcheck)
 }
 
-
 temp_add1 <- read.table("outputs/runs_revisions9add_run0004-2023-03-07-10h40/cumem.csv", sep=";", quote="\"")
 add1=processing2(temp_add1)
 add1$id="Additive 1%"
@@ -557,104 +473,59 @@ a$years=2015 + (as.numeric(a$years)-1)*5
 plottraj1<- ggplot(a, aes(x=years, y=`value_50%`, group=id, linetype=factor(id))) +
   xlab("Years") +
   geom_line(color='black')+
-  ylab("Stochastic mean temperature increase (in 캜)") +
+  ylab("Stochastic mean temperature increase (in 째C)") +
   scale_linetype_manual("Mean path",values = c("Additive 1%" = "longdash", "Risk-sensitive 1%" = "solid", "Additive 10%" = "dotted",  "Risk-sensitive 10%" = "dashed"))+
-  #  geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
   theme(legend.position="none")
- # theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-
-#temp, all paths
 b1=subset(a, a$id=="Additive 1%")
 
 plottraj2<- ggplot(b1, aes(x=years, y=`value_50%`, group=id, linetype=factor(id))) +
   xlab("Years") +
-  ylab("Stochastic temperature increase (in 캜)") +
+  ylab("Stochastic temperature increase (in 째C)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
   geom_line(color='black',size=1.2)+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+ 
-#  ylim(0, 1000)+
   theme(legend.position="none")+
   #theme(legend.position="none")+
   ggtitle("Additive, J=1%")
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 b2=subset(a, a$id=="Additive 10%")
 
 plottraj2b<- ggplot(b2, aes(x=years, y=`value_50%`, group=id, linetype=factor(id))) +
   xlab("Years") +
-  ylab("Stochastic temperature increase (in 캜)") +
+  ylab("Stochastic temperature increase (in 째C)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Additive 10%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
   geom_line(color='black',size=1.2)+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
-#  ylim(0, 2500)+
   theme(legend.position="none")+
   ggtitle("Additive, J=10%")
-  #theme(legend.position="none")+
- # theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 b3=subset(a, a$id=="Risk-sensitive 1%")
 
 plottraj2c<- ggplot(b3, aes(x=years, y=`value_50%`, group=id, linetype=factor(id))) +
   xlab("Years") +
-  ylab("Stochastic temperature increase (in 캜)") +
+  ylab("Stochastic temperature increase (in 째C)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Risk-sensitive 1%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
   geom_line(color='black',size=1.2)+
-  
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
-#  ylim(0, 1000)+
   theme(legend.position="none")+
   ggtitle("Risk-sensitive, J=1%")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 b4=subset(a, a$id=="Risk-sensitive 10%")
 
 plottraj2d<- ggplot(b4, aes(x=years, y=`value_50%`, group=id, linetype=factor(id))) +
   xlab("Years") +
-  ylab("Stochastic temperature increase (in 캜)") +
+  ylab("Stochastic temperature increase (in 째C)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Risk-sensitive 10%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
   geom_line(color='black',size=1.2)+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
-#  ylim(0, 2500)+
-  
-  # ylim(0, 2500)+
   theme(legend.position="none")+
   ggtitle("Risk-sensitive, J=10%")
-
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 b1$ratio=b3$`value_50%`/b1$`value_50%`
 b2$ratio=b4$`value_50%`/b2$`value_50%`
@@ -666,21 +537,10 @@ plottrajc<- ggplot(c, aes(x=years, y=ratio, group=id, linetype=factor(id))) +
   ylab("Ratio median risk-sensitive SCC to median additive SCC") +
   scale_linetype_manual(values = c("Additive 1%" = "solid", "Additive 10%" = "dashed"))+
   geom_hline(yintercept=1, linetype='dotted')+
-  #scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()
-  # ylim(0, 2500)+
-  #theme(legend.position="none")+
-  #theme(legend.position="none")+
-#0  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 library(patchwork)
 traj=plottraj2+plottraj2c+plottraj2b+plottraj2d
-
-
 
 traj_SCC_add1 <- read.table("outputs/runs_revisions9add_run0004-2023-03-07-10h40/traj_SCC.csv", sep=";", quote="\"")
 add1=processing2(traj_SCC_add1)
@@ -703,19 +563,8 @@ plottraj1b<- ggplot(a, aes(x=years, y=`value_50%`, group=id, linetype=factor(id)
   geom_line(color='black')+
   ylab("Mean stochastic SCC (in $/tC)") +
   scale_linetype_manual("Mean path",values = c("Additive 1%" = "longdash", "Risk-sensitive 1%" = "solid", "Additive 10%" = "dotted",  "Risk-sensitive 10%" = "dashed"))+
-#  geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
   theme(legend.position="none")
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
-#library(patchwork)
-#traj=plottraj1+plottraj1b
-
-
 
 #temp for all paths
 
@@ -725,20 +574,12 @@ plottraj2<- ggplot(b1, aes(x=years, y=`value_50%`, group=id, linetype=factor(id)
   xlab("Years") +
   ylab("Stochastic SCC (in $/tC)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "solid"))+
-#  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
-#  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
- # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
   geom_line(color='black',size=1.2)+
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+ 
   ylim(0, 2500)+
   theme(legend.position="none")+
-  #theme(legend.position="none")+
   ggtitle("Additive, J=1%")
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 b2=subset(a, a$id=="Additive 10%")
 
@@ -746,20 +587,12 @@ plottraj2b<- ggplot(b2, aes(x=years, y=`value_50%`, group=id, linetype=factor(id
   xlab("Years") +
   ylab("Stochastic SCC (in $/tC)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Additive 10%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
   geom_line(color='black',size=1.2)+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
   ylim(0, 2500)+
   theme(legend.position="none")+
   ggtitle("Additive, J=10%")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 b3=subset(a, a$id=="Risk-sensitive 1%")
 
@@ -767,19 +600,12 @@ plottraj2c<- ggplot(b3, aes(x=years, y=`value_50%`, group=id, linetype=factor(id
   xlab("Years") +
   ylab("Stochastic SCC (in $/tC)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Risk-sensitive 1%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
   geom_line(color='black',size=1.2)+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
   ylim(0, 2500)+
   theme(legend.position="none")+
   ggtitle("Risk-sensitive, J=1%")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 b4=subset(a, a$id=="Risk-sensitive 10%")
 
@@ -787,20 +613,12 @@ plottraj2d<- ggplot(b4, aes(x=years, y=`value_50%`, group=id, linetype=factor(id
   xlab("Years") +
   ylab("Stochastic SCC (in $/tC)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Risk-sensitive 10%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
   geom_line(color='black',size=1.2)+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
   ylim(0, 2500)+
- # ylim(0, 2500)+
   theme(legend.position="none")+
   ggtitle("Risk-sensitive, J=10%")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 b1$ratio=b3$`value_50%`/b1$`value_50%`
 b2$ratio=b4$`value_50%`/b2$`value_50%`
@@ -812,24 +630,13 @@ plottrajc<- ggplot(c, aes(x=years, y=ratio, group=id, linetype=factor(id))) +
   ylab("Ratio median risk-sensitive SCC to median additive SCC") +
     scale_linetype_manual(values = c("Additive 1%" = "solid", "Additive 10%" = "dashed"))+
   geom_hline(yintercept=1, linetype='dotted')+
-  #scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
-  # ylim(0, 2500)+
   theme(legend.position="none")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 library(patchwork)
 traj2=plottraj2+plottraj2c+plottraj2b+plottraj2d
 
-
 ##### abatmeent
-
-
 abatement_add1 <- read.table("outputs/runs_revisions9add_run0004-2023-03-07-10h40/abat_save.csv", sep=";", quote="\"")
 add1=processing2(abatement_add1)
 add1$id="Additive 1%"
@@ -854,17 +661,8 @@ plottraj1c<- ggplot(a, aes(x=years, y=`value_50%`, group=id, linetype=factor(id)
   geom_line(color='black')+
   ylab("Mean abatement rate (in %)") +
   scale_linetype_manual("Mean path",values = c("Additive 1%" = "longdash", "Risk-sensitive 1%" = "solid", "Additive 10%" = "dotted",  "Risk-sensitive 10%" = "dashed"))+
-  #  geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-#library(patchwork)
-#traj=plottraj1+plottraj1b
 
 #abatement for all paths
 
@@ -874,20 +672,11 @@ plottraj2<- ggplot(b1, aes(x=years, y=`value_50%`, group=id, linetype=factor(id)
   xlab("Years") +
   ylab("Stochastic abatement rate (in %)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
   geom_line(color='black',size=1.2)+
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+ 
-  #ylim(0, 1000)+
   theme(legend.position="none")+
   ggtitle("Additive, J=1%")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 b2=subset(a, a$id=="Additive 10%")
 
@@ -895,20 +684,11 @@ plottraj2b<- ggplot(b2, aes(x=years, y=`value_50%`, group=id, linetype=factor(id
   xlab("Years") +
   ylab("Stochastic abatement rate (in %)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Additive 10%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
   geom_line(color='black',size=1.2)+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
-#  ylim(0, 2500)+
   theme(legend.position="none")+
   ggtitle("Additive, J=10%")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 b3=subset(a, a$id=="Risk-sensitive 1%")
 
@@ -916,41 +696,23 @@ plottraj2c<- ggplot(b3, aes(x=years, y=`value_50%`, group=id, linetype=factor(id
   xlab("Years") +
   ylab("Stochastic abatement rate (in %)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Risk-sensitive 1%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
   geom_line(color='black',size=1.2)+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
- # ylim(0, 1000)+
   theme(legend.position="none")+
   ggtitle("Risk-sensitive, J=1%")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
+                
 b4=subset(a, a$id=="Risk-sensitive 10%")
 
 plottraj2d<- ggplot(b4, aes(x=years, y=`value_50%`, group=id, linetype=factor(id))) +
   xlab("Years") +
   ylab("Stochastic abatement rate (in %)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Risk-sensitive 10%" = "solid"))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("Additive 1%" = "longdash", "Additive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`),fill = "grey70")+
   geom_line(color='black',size=1.2)+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
- # ylim(0, 2500)+
-  
-  # ylim(0, 2500)+
   theme(legend.position="none")+
   ggtitle("Risk-sensitive, J=10%")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 b1$ratio=b3$`value_50%`/b1$`value_50%`
 b2$ratio=b4$`value_50%`/b2$`value_50%`
@@ -962,22 +724,11 @@ plottrajc<- ggplot(c, aes(x=years, y=ratio, group=id, linetype=factor(id))) +
   ylab("Ratio median risk-sensitive SCC to median additive SCC") +
   scale_linetype_manual(values = c("Additive 1%" = "solid", "Additive 10%" = "dashed"))+
   geom_hline(yintercept=1, linetype='dotted')+
-  #scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
-  # ylim(0, 2500)+
   theme(legend.position="none")
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 library(patchwork)
 traj3=plottraj2+plottraj2c+plottraj2b+plottraj2d
-
-
-
 
 c=subset(a,a$id=="Risk-sensitive 1%" | a$id=="Risk-sensitive 10%")
 
@@ -987,17 +738,10 @@ plottraj3<- ggplot(c, aes(x=years, y=`value_50%`, group=id, linetype=factor(id))
   ylab("Stochastic SCC (in $/tC)") +
   scale_linetype_manual("Quantiles of the distribution",values = c("Risk-sensitive 1%" = "longdash", "Risk-sensitive 10%" = "dotted"))+
   geom_ribbon(aes(ymin=`value_99%`, ymax=`value_1%`, fill = id))+
-  #  scale_linetype_manual("Quantiles of the distribution",values = c("add1" = "longdash", "add2" = "solid", "rs1" = "dotted", "rs2"="twodash"))+
-  # geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70") +
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()
-  #theme(legend.position="none")+
-#  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 library(patchwork)
 plot_traj_global=plottraj1+plottraj1b+plottraj1c
-
 
 temp <- read.table("tempt.csv", sep=";", quote="\"")
 library(matrixStats)
@@ -1025,11 +769,8 @@ qcheck=subset(q, q$years<=20)
 ggplot(qcheck, aes(x=years, y=value, group=id, linetype=factor(id))) +
   xlab("Years") +
   geom_line(color='black')+
-  ylab("Temperature (in 캜)") +
+  ylab("Temperature (in 째C)") +
   scale_linetype_manual("Quantiles of the distribution", values = c("1%" = 8, "99%" = 6, "50%" = 3))+
-  #  scale_y_discrete(limits=c(0.9, 1.1))+
-  #  scale_y_discrete(limits=c(1, 1.2,1.4,1.6, 1.8, 2))+
   theme_bw()+
-  #theme(legend.position="none")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
