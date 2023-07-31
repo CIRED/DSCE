@@ -65,11 +65,7 @@ def terminal_value(t,u):
     s=s0
     v=1/L[[0],:]*L[[t-1],:]*1/(1-(bet)*((1+GA[[t-1],:])**(deltaT*(1-theta)/(1-alpha))))*utility(conso,s)
     return v;
-    
-# function that defines general risk-sensitive preferences
-def Bommier_function2(u1,u2,pr):
-    return (-(1/epsilon_b)*log((1-pr)*exp(-epsilon_b*u1)+pr*exp(-epsilon_b*u2)))
-
+  
 # function that defines general risk-sensitive preferences
 def Bommier_function(u1,u2,pr):
     return (-(bet/epsilon_b)*log((1-pr)*exp(-epsilon_b*u1)+pr*exp(-epsilon_b*u2)))
