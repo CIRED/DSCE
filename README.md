@@ -1,5 +1,6 @@
 # DSCE
 A dynamic stochastic climate-economy model.
+[![DOI](https://zenodo.org/badge/672870601.svg)](https://zenodo.org/badge/latestdoi/672870601)
 
 
 History of this code:
